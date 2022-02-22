@@ -1,40 +1,42 @@
 local wezterm = require'wezterm'
 
 return {
-  -- key bindings
-  keys = {
-    { key='l', mods='ALT', action='ShowLauncher' },
-  },
-
   -- default shell
   default_prog = { 'wsl', '-d', 'void', '--cd', '~' },
+
+  -- key bindings
+  keys = {
+    { key = 'l', mods = 'ALT', action = 'ShowLauncher' },
+  },
 
   -- launch menu
   launch_menu = {
     {
-      label = "Powershell",
-      args = {"pwsh", "-nologo"},
+      label = 'Powershell',
+      args = { 'pwsh', '-nologo' },
     },
   },
 
   -- font settings
-  harfbuzz_features={ "calt=0", "clig=0", "liga=0" }, -- disable ligatures
+  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- disable ligatures
+  line_height = 1.26,
   font_size = 14.0,
   font = wezterm.font_with_fallback({
-    'VictorMono NF',
-    'Consolas',
-    'Sarasa Fixed CL', -- CJK font
+    'VictorMono NF', -- nerd font
+    'NanumGothicCoding', -- korean font
   }),
 
-  -- tab bar settings
-  use_fancy_tab_bar = false,
-  hide_tab_bar_if_only_one_tab = true,
+  -- disable hyperlink
+  hyperlink_rules = {{ regex = '', format = '', }},
+
+  -- window
   window_frame = {
     font_size = 10.0,
   },
 
-  -- disable hyperlink
-  hyperlink_rules = {{ regex = '', format = '', }},
+  -- tab bar settings
+  use_fancy_tab_bar = false,
+  hide_tab_bar_if_only_one_tab = true,
 
   -- kanagawa color scheme
   colors = {
