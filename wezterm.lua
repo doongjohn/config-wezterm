@@ -19,8 +19,8 @@ return {
 
   -- font settings
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- disable ligatures
-  line_height = 1.26,
-  font_size = 14.0,
+  line_height = 1.3,
+  font_size = 14.1,
   font = wezterm.font_with_fallback({
     'VictorMono NF', -- nerd font
     'NanumGothicCoding', -- korean font
@@ -32,6 +32,12 @@ return {
   -- window
   window_frame = {
     font_size = 10.0,
+  },
+  window_padding = {
+    left = 12,
+    right = 12,
+    top = 12,
+    bottom = 0
   },
 
   -- tab bar settings
