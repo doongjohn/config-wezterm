@@ -1,32 +1,48 @@
 local wezterm = require'wezterm'
 
+-- https://github.com/wez/wezterm/issues/2090
+local wsl_domains = wezterm.default_wsl_domains()
+for _, domain in ipairs(wsl_domains) do
+  domain.default_cwd = '~'
+end
+
 return {
-  -- default shell
-  default_prog = { 'wsl', '-d', 'void', '--cd', '~' },
+  wsl_domains = wsl_domains,
+  default_domain = 'WSL:Void',
 
   -- key bindings
   keys = {
-    { key = 'l', mods = 'ALT', action = 'ShowLauncher' },
+    { key = 'l', mods = 'ALT',
+      action = 'ShowLauncher' },
+
+    { key = '-', mods = 'ALT',
+      action = wezterm.action{ SplitVertical = { domain = 'CurrentPaneDomain' } } },
+
+    { key = '/', mods = 'ALT',
+      action = wezterm.action{ SplitHorizontal = { domain = 'CurrentPaneDomain' } } },
   },
 
   -- launch menu
   launch_menu = {
     {
+      label = 'Bash',
+      args = { 'bash' },
+    },
+    {
       label = 'Powershell',
-      args = { 'pwsh', '-nologo' },
+      args = { [[/mnt/c/Program Files/PowerShell/7/pwsh.exe]], '-nologo', '-wd', '~' },
     },
   },
 
   -- font settings
-  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- disable ligatures
-  line_height = 1.34,
-  font_size = 14,
+  line_height = 1.3,
+  font_size = 16,
   font = wezterm.font_with_fallback({
     'VictorMono NF', -- nerd font
     'NanumGothicCoding', -- korean font
-    'Cambria Math', -- NOTE: some math symbols mess up neovim...
     'Segoe UI Emoji',
   }),
+  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- disable ligatures
   adjust_window_size_when_changing_font_size = false,
 
   -- disable hyperlink
@@ -48,6 +64,13 @@ return {
 
   -- tab bar settings
   use_fancy_tab_bar = false,
+  hide_tab_bar_if_only_one_tab = true,
+  tab_max_width = 23,
+  wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+    return {
+      { Text = " " .. tab.tab_index .. ": " .. wezterm.truncate_left(tab.active_pane.title, max_width + 2) },
+    }
+  end),
 
   -- kanagawa color scheme
   colors = {
@@ -106,7 +129,8 @@ return {
     },
     indexed = {
       [16] = '#ffa066',
-      [17] = '#ff5d62'
+      [17] = '#223249'
+      -- [17] = '#ff5d62'
     },
   },
 }
