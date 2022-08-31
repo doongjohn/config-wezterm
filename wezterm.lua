@@ -35,10 +35,10 @@ return {
   },
 
   -- font settings
-  line_height = 1.3,
-  font_size = 16,
+  line_height = 1.32,
+  font_size = 14,
   font = wezterm.font_with_fallback({
-    'VictorMono NF', -- nerd font
+    'VictorMono NF',
     'NanumGothicCoding', -- korean font
     'Segoe UI Emoji',
   }),
@@ -58,8 +58,8 @@ return {
   window_padding = {
     top = 4,
     bottom = 0,
-    left = 12,
-    right = 12,
+    left = 10,
+    right = 10,
   },
 
   -- tab bar settings
