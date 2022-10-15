@@ -8,7 +8,10 @@ end
 
 return {
   wsl_domains = wsl_domains,
-  default_domain = 'WSL:Void',
+  -- default_domain = 'WSL:Void',
+  default_prog = { 'pwsh.exe', '-nologo', '-wd', '~' },
+
+  -- allow_win32_input_mode = false,
 
   -- key bindings
   keys = {
@@ -25,12 +28,11 @@ return {
   -- launch menu
   launch_menu = {
     {
-      label = 'Bash',
-      args = { 'bash' },
-    },
-    {
       label = 'Powershell',
-      args = { [[/mnt/c/Program Files/PowerShell/7/pwsh.exe]], '-nologo', '-wd', '~' },
+      args = { 'pwsh.exe', '-nologo', '-wd', '~' },
+      -- always use the local native domain to avoid running via WSL
+      -- when using `default_domain`.
+      domain = { DomainName = 'local' },
     },
   },
 
@@ -40,7 +42,7 @@ return {
   font = wezterm.font_with_fallback({
     'VictorMono NF',
     'NanumGothicCoding', -- korean font
-    'Segoe UI Emoji',
+    -- 'Segoe UI Emoji',
   }),
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- disable ligatures
   adjust_window_size_when_changing_font_size = false,
@@ -52,6 +54,8 @@ return {
   window_decorations = "RESIZE",
   initial_cols = 120,
   initial_rows = 23,
+  -- initial_cols = 80,
+  -- initial_rows = 24,
   window_frame = {
     font_size = 10.0,
   },
@@ -66,11 +70,11 @@ return {
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
   tab_max_width = 23,
-  wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    return {
-      { Text = " " .. tab.tab_index .. ": " .. wezterm.truncate_left(tab.active_pane.title, max_width + 2) },
-    }
-  end),
+  -- wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+  --   return {
+  --     { Text = " " .. tab.tab_index .. ": " .. wezterm.truncate_left(tab.active_pane.title, max_width + 2) },
+  --   }
+  -- end),
 
   -- kanagawa color scheme
   colors = {
