@@ -8,7 +8,7 @@ end
 
 return {
   wsl_domains = wsl_domains,
-  -- default_domain = 'WSL:Void',
+  -- default_domain = 'WSL:openSUSE-Tumbleweed',
   default_prog = { 'pwsh.exe', '-nologo', '-wd', '~' },
 
   -- allow_win32_input_mode = false,
@@ -19,10 +19,10 @@ return {
       action = 'ShowLauncher' },
 
     { key = '-', mods = 'ALT',
-      action = wezterm.action{ SplitVertical = { domain = 'CurrentPaneDomain' } } },
+      action = wezterm.action { SplitVertical = { domain = 'CurrentPaneDomain' } } },
 
     { key = '/', mods = 'ALT',
-      action = wezterm.action{ SplitHorizontal = { domain = 'CurrentPaneDomain' } } },
+      action = wezterm.action { SplitHorizontal = { domain = 'CurrentPaneDomain' } } },
   },
 
   -- launch menu
@@ -30,19 +30,17 @@ return {
     {
       label = 'Powershell',
       args = { 'pwsh.exe', '-nologo', '-wd', '~' },
-      -- always use the local native domain to avoid running via WSL
-      -- when using `default_domain`.
       domain = { DomainName = 'local' },
     },
   },
 
   -- font settings
-  line_height = 1.32,
-  font_size = 14,
+  line_height = 1.5,
+  font_size = 13.2,
   font = wezterm.font_with_fallback({
-    'VictorMono NF',
-    'NanumGothicCoding', -- korean font
-    -- 'Segoe UI Emoji',
+    'Hack Nerd Font',
+    'NanumGothicCoding',
+    'Segoe UI Emoji',
   }),
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- disable ligatures
   adjust_window_size_when_changing_font_size = false,
