@@ -2,7 +2,7 @@ local wezterm = require'wezterm'
 local mux = wezterm.mux
 
 wezterm.on('gui-startup', function(cmd)
-  local tab, pane, window = mux.spawn_window(cmd or {})
+  local _, _, window = mux.spawn_window(cmd or {})
   window:gui_window():maximize()
 end)
 
@@ -13,17 +13,20 @@ for _, domain in ipairs(wsl_domains) do
 end
 
 return {
-  wsl_domains = wsl_domains,
-
   -- default_domain = 'WSL:openSUSE-Tumbleweed',
   -- default_prog = { 'pwsh.exe', '-nologo', '-wd', '~' },
   default_prog = { 'nu' },
 
   -- allow_win32_input_mode = false,
 
+  wsl_domains = wsl_domains,
+
   -- key bindings
   keys = {
-    { key = 'l', mods = 'ALT',
+    { key = '/', mods = 'CTRL',
+      action = wezterm.action { SendString = '\x1b[47;5u' } },
+
+    { key = ';', mods = 'ALT',
       action = 'ShowLauncher' },
 
     { key = '-', mods = 'ALT',
@@ -69,21 +72,18 @@ return {
     right = 10,
   },
 
-  -- tab bar settings
+  -- tab bar
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
   tab_max_width = 23,
-  -- wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-  --   return {
-  --     { Text = " " .. tab.tab_index .. ": " .. wezterm.truncate_left(tab.active_pane.title, max_width + 2) },
-  --   }
-  -- end),
 
+  -- cursor
   force_reverse_video_cursor = true,
 
   -- kanagawa color scheme
   colors = {
     tab_bar = {
+      background = '#2A2A37',
       active_tab = {
         fg_color = '#dcd7ba',
         bg_color = '#1f1f28',
@@ -124,6 +124,6 @@ return {
 
     ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
     brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#dcd7ba" },
-    indexed = { [16] = "#ffa066", [17] = "#ff5d62" },
+    indexed = { [16] = "#2A2A37", [17] = "#16161D" },
   },
 }
