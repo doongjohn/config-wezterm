@@ -26,6 +26,9 @@ return {
     { key = '/', mods = 'CTRL',
       action = wezterm.action { SendString = '\x1b[47;5u' } },
 
+    { key = ';', mods = 'CTRL',
+      action = wezterm.action.ActivateCommandPalette },
+
     { key = ';', mods = 'ALT',
       action = 'ShowLauncher' },
 
@@ -50,6 +53,7 @@ return {
   font_size = 13.6,
   font = wezterm.font_with_fallback({
     'Hack Nerd Font',
+    'Sarasa Fixed K',
     'Segoe UI Emoji',
   }),
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- disable ligatures
@@ -79,6 +83,9 @@ return {
 
   -- cursor
   force_reverse_video_cursor = true,
+
+  command_palette_bg_color = '#2A2A37',
+  command_palette_fg_color = '#dcd7ba',
 
   -- kanagawa color scheme
   colors = {
