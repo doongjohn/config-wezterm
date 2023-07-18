@@ -26,7 +26,7 @@ return {
     { key = '/', mods = 'CTRL',
       action = wezterm.action { SendString = '\x1b[47;5u' } },
 
-    { key = ';', mods = 'CTRL',
+    { key = "'", mods = 'ALT',
       action = wezterm.action.ActivateCommandPalette },
 
     { key = ';', mods = 'ALT',
