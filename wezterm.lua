@@ -1,5 +1,6 @@
 local wezterm = require'wezterm'
 local mux = wezterm.mux
+local home = os.getenv('USERPROFILE')
 
 wezterm.on('gui-startup', function(cmd)
   local _, _, window = mux.spawn_window(cmd or {})
@@ -46,6 +47,11 @@ return {
       args = { 'pwsh.exe', '-nologo', '-wd', '~' },
       domain = { DomainName = 'local' },
     },
+    {
+      label = 'MSYS2',
+      args = { home .. '/msys2/usr/bin/env.exe', 'MSYS=enable_pcon', 'MSYSTEM=MSYS', 'MSYS2_PATH_TYPE=inherit', '/bin/bash', '--login' },
+      domain = { DomainName = 'local' },
+    }
   },
 
   -- font settings
