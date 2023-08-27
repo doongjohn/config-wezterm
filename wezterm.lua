@@ -24,18 +24,12 @@ return {
 
   -- key bindings
   keys = {
-    { key = '/', mods = 'CTRL',
-      action = wezterm.action { SendString = '\x1b[47;5u' } },
-
-    { key = "'", mods = 'ALT',
-      action = wezterm.action.ActivateCommandPalette },
-
     { key = ';', mods = 'ALT',
       action = 'ShowLauncher' },
-
+    { key = '/', mods = 'CTRL',
+      action = wezterm.action { SendString = '\x1b[47;5u' } },
     { key = '-', mods = 'ALT',
       action = wezterm.action { SplitVertical = { domain = 'CurrentPaneDomain' } } },
-
     { key = '/', mods = 'ALT',
       action = wezterm.action { SplitHorizontal = { domain = 'CurrentPaneDomain' } } },
   },
