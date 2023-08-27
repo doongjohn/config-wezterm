@@ -48,6 +48,11 @@ return {
       domain = { DomainName = 'local' },
     },
     {
+      label = 'Dev Powershell',
+      args = { 'pwsh.exe', '-nologo', '-noexit', '-c', "& 'C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1' && cd $env:USERPROFILE" },
+      domain = { DomainName = 'local' },
+    },
+    {
       label = 'MSYS2',
       args = { home .. '/msys2/usr/bin/env.exe', 'MSYS=enable_pcon', 'MSYSTEM=MSYS', 'MSYS2_PATH_TYPE=inherit', '/bin/bash', '--login' },
       domain = { DomainName = 'local' },
@@ -56,7 +61,7 @@ return {
 
   -- font settings
   line_height = 1.4,
-  font_size = 13.6,
+  font_size = 13,
   font = wezterm.font_with_fallback({
     'Hack Nerd Font',
     'Sarasa Fixed K',
