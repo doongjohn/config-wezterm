@@ -54,7 +54,7 @@ return {
   },
 
   -- font settings
-  line_height = 1.4,
+  line_height = 1.3,
   font_size = 13,
   font = wezterm.font_with_fallback({
     'Hack Nerd Font',
