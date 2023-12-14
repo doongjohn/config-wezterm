@@ -87,7 +87,7 @@ return {
   tab_max_width = 23,
 
   -- cursor
-  force_reverse_video_cursor = true,
+  -- force_reverse_video_cursor = true,
 
   command_palette_bg_color = '#2A2A37',
   command_palette_fg_color = '#dcd7ba',
@@ -124,9 +124,9 @@ return {
     foreground = "#dcd7ba",
     background = "#1f1f28",
 
-    cursor_bg = "#c8c093",
-    cursor_fg = "#c8c093",
-    cursor_border = "#c8c093",
+    cursor_bg = "#ccc598",
+    cursor_fg = "#1f1f28",
+    cursor_border = "#ccc598",
 
     selection_fg = "#c8c093",
     selection_bg = "#2d4f67",
