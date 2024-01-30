@@ -2,39 +2,41 @@ local wezterm = require'wezterm'
 local mux = wezterm.mux
 local home = os.getenv('USERPROFILE')
 
+for _, domain in ipairs(wezterm.default_wsl_domains()) do
+  -- https://github.com/wez/wezterm/issues/2090
+  domain.default_cwd = '~'
+end
+
+local function tab_title(tab_info)
+  local title = tab_info.tab_title
+  if title and #title > 0 then
+    return title
+  end
+  return tab_info.active_pane.title
+end
+
 wezterm.on('gui-startup', function(cmd)
   local _, _, window = mux.spawn_window(cmd or {})
   window:gui_window():maximize()
 end)
 
--- https://github.com/wez/wezterm/issues/2090
-local wsl_domains = wezterm.default_wsl_domains()
-for _, domain in ipairs(wsl_domains) do
-  domain.default_cwd = '~'
-end
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+  -- https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
+  local title = tab_title(tab)
+  if tab.is_active then
+    return {
+      { Text = '  ' .. title .. '  ' },
+    }
+  end
+  return '  ' .. title .. '  '
+end)
 
 return {
-  -- default_domain = 'WSL:openSUSE-Tumbleweed',
-  -- default_prog = { 'pwsh.exe', '-nologo', '-wd', '~' },
+  front_end = 'WebGpu',
   default_prog = { 'nu' },
-
+  hyperlink_rules = {{ regex = '', format = '', }}, -- disable hyperlink
   -- allow_win32_input_mode = false,
 
-  wsl_domains = wsl_domains,
-
-  -- key bindings
-  keys = {
-    { key = ';', mods = 'ALT',
-      action = 'ShowLauncher' },
-    { key = '/', mods = 'CTRL',
-      action = wezterm.action { SendString = '\x1b[47;5u' } },
-    { key = '-', mods = 'ALT',
-      action = wezterm.action { SplitVertical = { domain = 'CurrentPaneDomain' } } },
-    { key = '/', mods = 'ALT',
-      action = wezterm.action { SplitHorizontal = { domain = 'CurrentPaneDomain' } } },
-  },
-
-  -- launch menu
   launch_menu = {
     {
       label = 'Powershell',
@@ -64,11 +66,16 @@ return {
   harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }, -- disable ligatures
   adjust_window_size_when_changing_font_size = false,
 
-  -- disable hyperlink
-  hyperlink_rules = {{ regex = '', format = '', }},
+  -- key bindings
+  keys = {
+    { key = ';', mods = 'ALT', action = 'ShowLauncher' },
+    { key = '/', mods = 'CTRL', action = wezterm.action { SendString = '\x1b[47;5u' } },
+    { key = '-', mods = 'ALT', action = wezterm.action { SplitVertical = { domain = 'CurrentPaneDomain' } } },
+    { key = '/', mods = 'ALT', action = wezterm.action { SplitHorizontal = { domain = 'CurrentPaneDomain' } } },
+  },
 
   -- window
-  window_decorations = "RESIZE",
+  window_decorations = 'RESIZE',
   initial_cols = 90,
   initial_rows = 18,
   window_frame = {
@@ -81,6 +88,10 @@ return {
     right = 10,
   },
 
+  -- command palette
+  command_palette_bg_color = '#2A2A37',
+  command_palette_fg_color = '#dcd7ba',
+
   -- tab bar
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
@@ -88,9 +99,6 @@ return {
 
   -- cursor
   -- force_reverse_video_cursor = true,
-
-  command_palette_bg_color = '#2A2A37',
-  command_palette_fg_color = '#dcd7ba',
 
   -- kanagawa color scheme
   colors = {
@@ -102,7 +110,7 @@ return {
       },
       inactive_tab = {
         bg_color = '#2A2A37',
-        fg_color = '#C8C093',
+        fg_color = '#727169',
       },
       inactive_tab_hover = {
         bg_color = '#363646',
