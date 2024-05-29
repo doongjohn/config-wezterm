@@ -1,4 +1,4 @@
-local wezterm = require'wezterm'
+local wezterm = require 'wezterm'
 local mux = wezterm.mux
 local home = os.getenv('USERPROFILE')
 
@@ -57,9 +57,9 @@ return {
 
   -- font settings
   line_height = 1.3,
-  font_size = 13,
+  font_size = 13.7,
   font = wezterm.font_with_fallback({
-    'Hack Nerd Font',
+    'CommitMono Nerd Font',
     'Sarasa Fixed K',
     'Segoe UI Emoji',
   }),
