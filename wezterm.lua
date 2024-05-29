@@ -35,7 +35,6 @@ return {
   front_end = 'WebGpu',
   default_prog = { 'nu' },
   hyperlink_rules = {{ regex = '', format = '', }}, -- disable hyperlink
-  -- allow_win32_input_mode = false,
 
   launch_menu = {
     {
@@ -44,8 +43,8 @@ return {
       domain = { DomainName = 'local' },
     },
     {
-      label = 'Dev Powershell',
-      args = { 'pwsh.exe', '-nologo', '-noexit', '-c', "& 'C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\Tools\\Launch-VsDevShell.ps1' && cd $env:USERPROFILE" },
+      label = 'Visual Studio Developer cmd',
+      args = { 'cmd.exe', '/k', 'C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat' },
       domain = { DomainName = 'local' },
     },
     {
@@ -57,7 +56,7 @@ return {
 
   -- font settings
   line_height = 1.3,
-  font_size = 13.7,
+  font_size = 14,
   font = wezterm.font_with_fallback({
     'CommitMono Nerd Font',
     'Sarasa Fixed K',
@@ -96,9 +95,6 @@ return {
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
   tab_max_width = 23,
-
-  -- cursor
-  -- force_reverse_video_cursor = true,
 
   -- kanagawa color scheme
   colors = {
