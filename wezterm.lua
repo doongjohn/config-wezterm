@@ -55,10 +55,10 @@ return {
   },
 
   -- font settings
-  line_height = 1.3,
+  line_height = 1.25,
   font_size = 14,
   font = wezterm.font_with_fallback({
-    'CommitMono Nerd Font',
+    'Hack Nerd Font',
     'Sarasa Fixed K',
     'Segoe UI Emoji',
   }),
@@ -93,7 +93,7 @@ return {
 
   -- tab bar
   use_fancy_tab_bar = false,
-  hide_tab_bar_if_only_one_tab = true,
+  hide_tab_bar_if_only_one_tab = false,
   tab_max_width = 23,
 
   -- kanagawa color scheme
@@ -140,6 +140,6 @@ return {
 
     ansi = { "#090618", "#c34043", "#76946a", "#c0a36e", "#7e9cd8", "#957fb8", "#6a9589", "#c8c093" },
     brights = { "#727169", "#e82424", "#98bb6c", "#e6c384", "#7fb4ca", "#938aa9", "#7aa89f", "#fcf5d4" },
-    indexed = { [16] = "#2A2A37", [17] = "#16161D" },
+    -- indexed = { [16] = "#2A2A37", [17] = "#16161D" },
   },
 }
