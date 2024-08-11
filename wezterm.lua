@@ -43,13 +43,13 @@ return {
       domain = { DomainName = 'local' },
     },
     {
-      label = 'Visual Studio Developer cmd',
-      args = { 'cmd.exe', '/k', 'C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat' },
+      label = 'Visual Studio Dev cmd x64',
+      args = { 'cmd.exe', '/k', [[C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat]] },
       domain = { DomainName = 'local' },
     },
     {
       label = 'MSYS2',
-      args = { home .. '/msys2/usr/bin/env.exe', 'MSYS=enable_pcon', 'MSYSTEM=MSYS', 'MSYS2_PATH_TYPE=inherit', '/bin/bash', '--login' },
+      args = { home .. [[\msys2\usr\bin\env.exe]], 'MSYS=enable_pcon', 'MSYSTEM=UCRT64', 'MSYS2_PATH_TYPE=inherit', '/usr/bin/fish', '-li' },
       domain = { DomainName = 'local' },
     }
   },
