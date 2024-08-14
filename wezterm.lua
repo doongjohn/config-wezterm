@@ -49,16 +49,16 @@ return {
     },
     {
       label = 'MSYS2',
-      args = { home .. [[\msys2\usr\bin\env.exe]], 'MSYS=enable_pcon', 'MSYSTEM=UCRT64', 'MSYS2_PATH_TYPE=inherit', '/usr/bin/fish', '-li' },
+      args = { home .. [[\msys2\usr\bin\env.exe]], 'MSYS=enable_pcon', 'MSYSTEM=UCRT64', 'MSYS2_PATH_TYPE=inherit', '/usr/bin/fish', '-li', '-C', 'cd' },
       domain = { DomainName = 'local' },
     }
   },
 
   -- font settings
-  line_height = 1.25,
+  line_height = 1.4,
   font_size = 14,
   font = wezterm.font_with_fallback({
-    'Hack Nerd Font',
+    'CommitMono Nerd Font',
     'Sarasa Fixed K',
     'Segoe UI Emoji',
   }),
